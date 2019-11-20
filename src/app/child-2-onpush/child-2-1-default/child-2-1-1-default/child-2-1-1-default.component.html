@@ -53,18 +53,3 @@
 <div>
   <button type="button" (click)="detectChangesWithDelay()">ChangeDetectorRef.detectChanges() with delay(2000ms)</button>
 </div>
-
-
-<app-child-1-default
-  [@blinkAnimation]="counter"
-  class="child"
-  [inputValue]="childInputValue"
-  (emitEvent)="onEmitEvent()">
-</app-child-1-default>
-
-<app-child-2-onpush
-  [@blinkAnimation]="counter"
-  class="child"
-  [inputValue]="childInputValue"
-  (emitEvent)="onEmitEvent()">
-</app-child-2-onpush>

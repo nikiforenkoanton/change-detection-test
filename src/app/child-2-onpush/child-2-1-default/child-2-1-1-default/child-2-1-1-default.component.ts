@@ -7,13 +7,12 @@ const changeDetectionStrategyKey: ChangeDetectionStrategiesEnum = ChangeDetectio
 const changeDetectionStrategy: ChangeDetectionStrategy = ChangeDetectionStrategy[changeDetectionStrategyKey];
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
+  selector: 'app-child-2-1-1-default',
+  templateUrl: './child-2-1-1-default.component.html',
   changeDetection: changeDetectionStrategy,
   animations: [blinkAnimation],
 })
-export class AppComponent extends BaseCdrComponent {
+export class Child211DefaultComponent extends BaseCdrComponent {
   public changeDetectionStrategyKey: ChangeDetectionStrategiesEnum = changeDetectionStrategyKey;
 
   constructor(

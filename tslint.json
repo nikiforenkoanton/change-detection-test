@@ -25,6 +25,7 @@
       true,
       "rxjs/Rx"
     ],
+    "import-spacing": false,
     "interface-name": false,
     "max-classes-per-file": false,
     "max-line-length": [
@@ -53,10 +54,7 @@
       "trace"
     ],
     "no-empty": false,
-    "no-inferrable-types": [
-      true,
-      "ignore-params"
-    ],
+    "no-inferrable-types": false,
     "no-non-null-assertion": true,
     "no-redundant-jsdoc": true,
     "no-switch-case-fall-through": true,
