@@ -1,5 +1,4 @@
 import { ChangeDetectionStrategy, Component, Injector } from '@angular/core';
-import { blinkAnimation }                               from 'src/app/animations';
 import { BaseCdrComponent }                             from 'src/app/base-cdr.component';
 import { ChangeDetectionStrategiesEnum }                from 'src/app/enums/change-detection-strategies.enum';
 
@@ -11,7 +10,6 @@ const changeDetectionStrategy: ChangeDetectionStrategy = ChangeDetectionStrategy
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
   changeDetection: changeDetectionStrategy,
-  animations: [blinkAnimation],
 })
 export class AppComponent extends BaseCdrComponent {
   public changeDetectionStrategyKey: ChangeDetectionStrategiesEnum = changeDetectionStrategyKey;

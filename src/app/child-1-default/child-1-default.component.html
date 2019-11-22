@@ -10,20 +10,18 @@
 
 <div>Pure Pipe Value: {{purePipeValue | appPurePipe}}</div>
 
+<div>Async Pipe Value: {{asyncPipeValue$ | async}}</div>
+
 <div>
   <input type="text" [(ngModel)]="inputNgModel" placeholder="Input">
 </div>
 
 <div>
-  <button type="button" (click)="triggerClickEvent()">Trigger click event</button>
+  <button class="emitEvent" type="button">Emit event</button>
 </div>
 
 <div>
-  <button type="button" (click)="emitEventWithDelay()">Emit event with delay(2000ms)</button>
-</div>
-
-<div>
-  <button type="button" (click)="increaseChildInputValue()">Increase child @Input() value</button>
+  <button type="button" (click)="increaseChildInput()">Increase child @Input()</button>
 </div>
 
 <div>
@@ -39,32 +37,34 @@
 </div>
 
 <div>
+  <button type="button" (click)="increaseAsyncPipeValueWithDelay()">Increase async pipe value with delay(2000ms)</button>
+</div>
+
+<div>
   <button type="button" (click)="triggerTimeout()">Trigger timeout(2000ms)</button>
 </div>
 
 <div>
-  <button type="button" (click)="applicationRefTickWithDelay()">ApplicationRef.Tick() with delay(2000ms)</button>
+  <button type="button" (click)="applicationRefTickWithDelay()">AppRef.Tick() with delay(2000ms)</button>
 </div>
 
 <div>
-  <button type="button" (click)="markForCheckWithDelay()">ChangeDetectorRef.markForCheck() with delay(2000ms)</button>
+  <button type="button" (click)="markForCheckWithDelay()">cdr.markForCheck() with delay(2000ms)</button>
 </div>
 
 <div>
-  <button type="button" (click)="detectChangesWithDelay()">ChangeDetectorRef.detectChanges() with delay(2000ms)</button>
+  <button type="button" (click)="detectChangesWithDelay()">cdr.detectChanges() with delay(2000ms)</button>
 </div>
 
 
 <app-child-1-1-default
-  [@blinkAnimation]="counter"
   class="child"
   [inputValue]="childInputValue"
-  (emitEvent)="onEmitEvent()">
+  (event)="onEvent()">
 </app-child-1-1-default>
 
 <app-child-1-2-onpush
-  [@blinkAnimation]="counter"
   class="child"
   [inputValue]="childInputValue"
-  (emitEvent)="onEmitEvent()">
+  (event)="onEvent()">
 </app-child-1-2-onpush>

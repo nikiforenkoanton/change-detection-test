@@ -2,6 +2,7 @@ import { NgModule }                 from '@angular/core';
 import { FormsModule }              from '@angular/forms';
 import { BrowserModule }            from '@angular/platform-browser';
 import { BrowserAnimationsModule }  from '@angular/platform-browser/animations';
+import { AppComponent }             from 'src/app/app.component';
 import { Child111DefaultComponent } from 'src/app/child-1-default/child-1-1-default/child-1-1-1-default/child-1-1-1-default.component';
 import { Child112OnpushComponent }  from 'src/app/child-1-default/child-1-1-default/child-1-1-2-onpush/child-1-1-2-onpush.component';
 import { Child11DefaultComponent }  from 'src/app/child-1-default/child-1-1-default/child-1-1-default.component';
@@ -18,7 +19,6 @@ import { Child22OnpushComponent }   from 'src/app/child-2-onpush/child-2-2-onpus
 import { Child2OnpushComponent }    from 'src/app/child-2-onpush/child-2-onpush.component';
 import { ImpurePipe }               from 'src/app/pipes/impure.pipe';
 import { PurePipe }                 from 'src/app/pipes/pure.pipe';
-import { AppComponent }             from './app.component';
 
 @NgModule({
   imports: [
