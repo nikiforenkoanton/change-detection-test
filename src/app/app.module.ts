@@ -17,9 +17,9 @@ import { Child221DefaultComponent } from 'src/app/child-2-onpush/child-2-2-onpus
 import { Child222OnpushComponent }  from 'src/app/child-2-onpush/child-2-2-onpush/child-2-2-2-onpush/child-2-2-2-onpush.component';
 import { Child22OnpushComponent }   from 'src/app/child-2-onpush/child-2-2-onpush/child-2-2-onpush.component';
 import { Child2OnpushComponent }    from 'src/app/child-2-onpush/child-2-onpush.component';
-import { GlobalService }            from 'src/app/global.service';
 import { ImpurePipe }               from 'src/app/pipes/impure.pipe';
 import { PurePipe }                 from 'src/app/pipes/pure.pipe';
+import { GlobalService }            from 'src/app/services/global.service';
 
 @NgModule({
   imports: [
