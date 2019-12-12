@@ -12,12 +12,14 @@
 
 <div>Async Pipe Value: {{asyncPipeValue$ | async}}</div>
 
+<div>Global Async Pipe Value: {{globalService.globalObservable$ | async}}</div>
+
 <div>
   <input type="text" [(ngModel)]="inputNgModel" placeholder="Input">
 </div>
 
 <div>
-  <button class="emitEvent" type="button">Emit event</button>
+  <button type="button" (click)="emitEvent()">Emit event</button>
 </div>
 
 <div>
@@ -37,23 +39,27 @@
 </div>
 
 <div>
-  <button type="button" (click)="increaseAsyncPipeValueWithDelay()">Increase async pipe value with delay(2000ms)</button>
+  <button type="button" (click)="increaseAsyncPipeValue()">Increase async pipe value</button>
 </div>
 
 <div>
-  <button type="button" (click)="triggerTimeout()">Trigger timeout(2000ms)</button>
+  <button type="button" (click)="increaseGlobalObservableValue()">Increase global observable value</button>
 </div>
 
 <div>
-  <button type="button" (click)="applicationRefTickWithDelay()">AppRef.Tick() with delay(2000ms)</button>
+  <button type="button" (click)="triggerTimeout()">Trigger timeout(1s)</button>
 </div>
 
 <div>
-  <button type="button" (click)="markForCheckWithDelay()">cdr.markForCheck() with delay(2000ms)</button>
+  <button type="button" (click)="applicationRefTick()">AppRef.Tick()</button>
 </div>
 
 <div>
-  <button type="button" (click)="detectChangesWithDelay()">cdr.detectChanges() with delay(2000ms)</button>
+  <button type="button" (click)="markForCheck()">cdr.markForCheck()</button>
+</div>
+
+<div>
+  <button type="button" (click)="detectChanges()">cdr.detectChanges()</button>
 </div>
 
 

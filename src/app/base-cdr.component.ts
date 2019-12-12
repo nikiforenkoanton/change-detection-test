@@ -1,18 +1,20 @@
+import { HttpClient }                    from '@angular/common/http';
 import {
   AfterViewInit,
   ApplicationRef,
   ChangeDetectorRef,
   DoCheck,
   ElementRef,
-  EventEmitter, HostBinding,
+  EventEmitter,
   Injector,
   Input,
   NgZone,
   Output,
   Renderer2
-} from '@angular/core';
+}                                        from '@angular/core';
 import { BehaviorSubject }               from 'rxjs';
 import { ChangeDetectionStrategiesEnum } from 'src/app/enums/change-detection-strategies.enum';
+import { GlobalService }                 from 'src/app/global.service';
 
 export abstract class BaseCdrComponent implements AfterViewInit, DoCheck {
   @Output() public event: EventEmitter<void> = new EventEmitter<void>();
@@ -24,6 +26,7 @@ export abstract class BaseCdrComponent implements AfterViewInit, DoCheck {
   private renderer2: Renderer2;
   private elementRef: ElementRef;
   private ngZone: NgZone;
+  private globalService: GlobalService;
 
   private timeoutHandle: number;
   private nativeElement: HTMLElement;
@@ -46,34 +49,12 @@ export abstract class BaseCdrComponent implements AfterViewInit, DoCheck {
     this.renderer2 = injector.get(Renderer2);
     this.elementRef = injector.get(ElementRef);
     this.ngZone = injector.get(NgZone);
+    this.globalService = injector.get(GlobalService);
     this.nativeElement = this.elementRef.nativeElement;
   }
 
   public ngAfterViewInit(): void {
-    this.addEventListeners();
     this.renderer2.addClass(this.nativeElement, this.changeDetectionStrategyKey);
-  }
-
-  private addEventListeners(): void {
-    this.ngZone.runOutsideAngular(() => {
-      // emitEvent
-      this.renderer2.listen(
-        this.nativeElement.querySelector('.emitEvent'),
-        'click',
-        () => {
-          this.emitEvent();
-        }
-      );
-
-      // // increaseChildInput
-      // this.renderer2.listen(
-      //   this.nativeElement.querySelector('.increaseChildInput'),
-      //   'click',
-      //   () => {
-      //     this.increaseChildInput();
-      //   }
-      // );
-    });
   }
 
   public ngDoCheck(): void {
@@ -81,14 +62,12 @@ export abstract class BaseCdrComponent implements AfterViewInit, DoCheck {
   }
 
   public get getCounter(): number {
-    this.setBackground();
+    this.animateBackground();
     return this.counter++;
   }
 
   public emitEvent(): void {
-    this.ngZone.run(() => {
-      this.event.emit();
-    });
+    this.event.emit();
   }
 
   public increaseChildInput(): void {
@@ -107,49 +86,49 @@ export abstract class BaseCdrComponent implements AfterViewInit, DoCheck {
     this.purePipeValue++;
   }
 
-  public increaseAsyncPipeValueWithDelay(): void {
-    setTimeout(() => {
-      this.asyncPipeValue$.next(this.asyncPipeValue$.value + 1);
-    }, 2000);
+  public increaseAsyncPipeValue(): void {
+    this.asyncPipeValue$.next(this.asyncPipeValue$.value + 1);
+  }
+
+  public increaseGlobalObservableValue(): void {
+    this.globalService.globalObservable$.next(this.globalService.globalObservable$.value + 1);
   }
 
   public triggerTimeout(): void {
     setTimeout(() => {
-    }, 2000);
+    }, 1000);
   }
 
-  public applicationRefTickWithDelay(): void {
-    setTimeout(() => {
-      this.applicationRef.tick();
-    }, 2000);
+  public applicationRefTick(): void {
+    this.applicationRef.tick();
   }
 
-  public markForCheckWithDelay(): void {
-    setTimeout(() => {
-      this.changeDetectorRef.markForCheck();
-    }, 2000);
+  public markForCheck(): void {
+    this.changeDetectorRef.markForCheck();
   }
 
-  public detectChangesWithDelay(): void {
-    setTimeout(() => {
-      this.changeDetectorRef.detectChanges();
-    }, 2000);
+  public detectChanges(): void {
+    this.changeDetectorRef.detectChanges();
   }
 
   public onEvent(): void {
   }
 
-  private setBackground(): void {
-    this.renderer2.setStyle(this.nativeElement, 'background-color', 'yellow');
-    this.resetBackground();
+  private animateBackground(): void {
+    this.setBackground();
+    this.resetBackgroundWithDelay();
   }
 
-  private resetBackground(): void {
+  private setBackground(): void {
+    this.renderer2.setStyle(this.nativeElement, 'background-color', 'yellow');
+  }
+
+  private resetBackgroundWithDelay(): void {
     this.ngZone.runOutsideAngular(() => {
       clearTimeout(this.timeoutHandle);
       this.timeoutHandle = setTimeout(() => {
         this.renderer2.setStyle(this.nativeElement, 'background-color', '');
-      }, 500);
+      }, 200);
     });
   }
 }
