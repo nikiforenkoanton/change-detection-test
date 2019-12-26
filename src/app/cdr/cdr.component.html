@@ -1,4 +1,4 @@
-<div>changeDetectionStrategy: {{changeDetectionStrategyKey}}</div>
+<div>{{changeDetectionStrategyKey}}</div>
 
 <div>@Input() value: {{inputValue}}</div>
 
@@ -6,7 +6,7 @@
 
 <div>ngDoCheck Counter: {{ngDoCheckCounter}}</div>
 
-<div>Impure Pipe Value: {{impurePipeValue | appImpurePipe}}</div>
+<div>Impure Pipe Value: {{null | appImpurePipe}}</div>
 
 <div>Pure Pipe Value: {{purePipeValue | appPurePipe}}</div>
 
@@ -28,10 +28,6 @@
 
 <div>
   <button type="button" (click)="increaseCounter()">Increase counter</button>
-</div>
-
-<div>
-  <button type="button" (click)="increaseImPurePipeInputValue()">Increase impure pipe value</button>
 </div>
 
 <div>
@@ -63,14 +59,22 @@
 </div>
 
 
-<app-child-2-1-default
-  class="child"
-  [inputValue]="childInputValue"
-  (event)="onEvent()">
-</app-child-2-1-default>
+<ng-container
+  *ngFor="let child of componentsStructure.children"
+  [ngSwitch]="GLOBAL_CD_STRATEGY_KEY || child.changeDetection">
+  <app-cdr-default
+    *ngSwitchCase="ChangeDetectionStrategiesEnum.Default"
+    class="child"
+    [componentsStructure]="child"
+    [inputValue]="childInputValue"
+    (event)="onEvent()">
+  </app-cdr-default>
 
-<app-child-2-2-onpush
-  class="child"
-  [inputValue]="childInputValue"
-  (event)="onEvent()">
-</app-child-2-2-onpush>
+  <app-cdr-onpush
+    *ngSwitchCase="ChangeDetectionStrategiesEnum.OnPush"
+    class="child"
+    [componentsStructure]="child"
+    [inputValue]="childInputValue"
+    (event)="onEvent()">
+  </app-cdr-onpush>
+</ng-container>

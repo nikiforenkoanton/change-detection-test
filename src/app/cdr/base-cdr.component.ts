@@ -13,11 +13,14 @@ import {
 }                                        from '@angular/core';
 import { BehaviorSubject }               from 'rxjs';
 import { ChangeDetectionStrategiesEnum } from 'src/app/enums/change-detection-strategies.enum';
+import { GLOBAL_CD_STRATEGY_KEY }        from 'src/app/global-cd-strategy.const';
+import { ComponentsStructureModel }      from 'src/app/models/components-structure.model';
 import { GlobalService }                 from 'src/app/services/global.service';
 
 export abstract class BaseCdrComponent implements AfterViewInit, DoCheck {
   @Output() public event: EventEmitter<void> = new EventEmitter<void>();
 
+  @Input() public componentsStructure: ComponentsStructureModel;
   @Input() public inputValue: number;
 
   private changeDetectorRef: ChangeDetectorRef;
@@ -30,11 +33,13 @@ export abstract class BaseCdrComponent implements AfterViewInit, DoCheck {
   private timeoutHandle: number;
   private nativeElement: HTMLElement;
 
+  public GLOBAL_CD_STRATEGY_KEY: typeof GLOBAL_CD_STRATEGY_KEY = GLOBAL_CD_STRATEGY_KEY;
+  public ChangeDetectionStrategiesEnum: typeof ChangeDetectionStrategiesEnum = ChangeDetectionStrategiesEnum;
+
   public counter: number = 0;
   public ngDoCheckCounter: number = 0;
   public childInputValue: number = 0;
   public inputNgModel: string = '';
-  public impurePipeValue: number = 0;
   public purePipeValue: number = 0;
   public asyncPipeValue$: BehaviorSubject<number> = new BehaviorSubject<number>(0);
 
@@ -75,10 +80,6 @@ export abstract class BaseCdrComponent implements AfterViewInit, DoCheck {
 
   public increaseCounter(): void {
     this.counter++;
-  }
-
-  public increaseImPurePipeInputValue(): void {
-    this.impurePipeValue++;
   }
 
   public increasePurePipeInputValue(): void {
